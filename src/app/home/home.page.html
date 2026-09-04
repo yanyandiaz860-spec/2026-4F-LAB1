@@ -1,20 +1,113 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="mobile-shell" [fullscreen]="true">
+  <div class="customer-app">
+    <div class="status-bar">
+      <span>5:02</span>
+      <div class="status-icons">
+        <span class="dot dot-one"></span>
+        <span class="dot dot-two"></span>
+        <span class="dot dot-three"></span>
+      </div>
+      <span>57</span>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <header class="top-header">
+      <div class="camera-indicator" aria-hidden="true"></div>
+      <button type="button" class="assist-button" (click)="onNeedAssistance()">
+        Need Assistance
+      </button>
+    </header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <section class="brand-row">
+      <div class="logo-mark">
+        <div class="pattern"></div>
+      </div>
+      <div class="table-label">ESTORIA • Table A-7</div>
+    </section>
+
+    <section class="greeting-row">
+      <h1>Hey, Good {{ greeting }}!</h1>
+      <button class="all-dishes-btn" type="button" [routerLink]="['/cart']">
+        <span>See Orders</span>
+        @if (cartCount > 0) {
+          <span class="mini-badge">{{ cartCount }}</span>
+        }
+      </button>
+    </section>
+
+    <div class="segment-switch" aria-label="Order type selector">
+      <button
+        type="button"
+        [class.active]="orderType === 'Dine-in'"
+        (click)="toggleOrderType('Dine-in')"
+      >
+        Dine-in
+      </button>
+      <button
+        type="button"
+        [class.active]="orderType === 'Takeout'"
+        (click)="toggleOrderType('Takeout')"
+      >
+        Takeout
+      </button>
+    </div>
+
+    <label class="search-box" aria-label="Search items">
+      <span class="search-icon">⌕</span>
+      <input
+        [ngModel]="searchTerm"
+        (ngModelChange)="onSearchChange($event)"
+        placeholder="Search for dishes..."
+        type="text"
+      />
+    </label>
+
+    @if (searchTerm.trim()) {
+      <section class="search-result-panel">
+        @for (item of searchResults; track item.id) {
+          <div class="result-item">
+            <span>{{ item.name }}</span>
+            <strong>₱{{ item.price }}</strong>
+          </div>
+        }
+      </section>
+    } @else {
+      <section class="catalog-panel">
+        <div class="single-section-block">
+          <div class="single-section-head">
+            <h2>Menu</h2>
+            <button class="see-all" type="button" [routerLink]="['/menu']">
+              See All
+            </button>
+          </div>
+        </div>
+      </section>
+    }
+
+    <section class="featured-section">
+      <div class="featured-header">
+        <h2>Bestsellers</h2>
+      </div>
+
+      @if (activeFeaturedItem) {
+        <article class="featured-card">
+          <img [src]="activeFeaturedItem.image" [alt]="activeFeaturedItem.name" />
+          <div class="featured-info">
+            <span class="featured-label">Featured</span>
+            <h3>{{ activeFeaturedItem.name }}</h3>
+            <p>{{ activeFeaturedItem.description }}</p>
+            <div class="featured-meta">
+              <strong>₱{{ activeFeaturedItem.price }}</strong>
+              <button type="button">Add</button>
+            </div>
+          </div>
+        </article>
+      }
+    </section>
+
+    @if (assistanceClicks > 0) {
+      <div class="session-note">
+        Assistance requested: {{ assistanceClicks }}/3
+      </div>
+    }
   </div>
 </ion-content>

@@ -1,0 +1,127 @@
+.screen-shell {
+  --background: #eceae2;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 22px 10px;
+  background: rgba(240, 238, 233, 0.96);
+  border-bottom: 1px solid rgba(77, 92, 66, 0.08);
+}
+
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6a8d5d, #4d6d49);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.brand-copy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2f542f;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  font-size: 0.85rem;
+}
+
+.assist-button {
+  border: 1px solid rgba(62, 79, 52, 0.32);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  color: #30512d;
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.menu-layout {
+  padding: 18px 22px 80px;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 18px 0 22px;
+}
+
+.page-title h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.12;
+  color: #2b4b2e;
+  font-weight: 900;
+}
+
+.page-title a {
+  color: #486b3e;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.category-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.category-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  padding: 16px 22px;
+  border: 1px solid rgba(70, 92, 52, 0.32);
+  border-radius: 999px;
+  background: rgba(252, 252, 249, 0.9);
+  color: #2f4b2a;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.category-button.is-active {
+  background: rgba(105, 139, 81, 0.9);
+  color: white;
+  border-color: rgba(105, 139, 81, 0.8);
+}
+
+.empty-category {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.5);
+  color: #49674a;
+  font-weight: 700;
+  text-align: center;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 420px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+}

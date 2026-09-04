@@ -1,0 +1,45 @@
+<ion-content class="screen-shell">
+  <header class="topbar">
+    <div class="brand-block">
+      <div class="brand-mark">E</div>
+      <div class="brand-copy">
+        <span>ESTORIA · Table 1</span>
+      </div>
+    </div>
+    <button class="assist-button" type="button" [routerLink]="['/cart']">
+      Cart ({{ cartService.getCount() }})
+    </button>
+  </header>
+
+  <main class="menu-layout">
+    <div class="page-title">
+      <h1>Categories</h1>
+      <a [routerLink]="['/home']">Back</a>
+    </div>
+
+    <section class="category-strip" aria-label="Food categories">
+      @for (category of visibleCategories; track category) {
+        <button
+          type="button"
+          class="category-button"
+          [class.is-active]="selectedCategory === category"
+          (click)="onCategoryChange(category)"
+        >
+          {{ category }}
+        </button>
+      }
+    </section>
+
+    @if (filteredItems.length === 0) {
+      <div class="empty-category">
+        No items available for {{ selectedCategory }} yet.
+      </div>
+    } @else {
+      <section class="menu-grid">
+        @for (item of filteredItems; track item.id) {
+          <app-menu-card [item]="item" (addItem)="onAddItem($event)"></app-menu-card>
+        }
+      </section>
+    }
+  </main>
+</ion-content>

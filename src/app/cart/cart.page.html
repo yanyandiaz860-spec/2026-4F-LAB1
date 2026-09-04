@@ -1,0 +1,60 @@
+<ion-content class="screen-shell">
+  <div class="cart-wrapper">
+    <header class="cart-header">
+      <button class="back-link" type="button" [routerLink]="['/home']">←</button>
+      <h1>My Orders</h1>
+      <span class="count-pill">{{ itemCount }} items</span>
+    </header>
+
+    @if (items.length === 0) {
+      <section class="empty-state">
+        <div class="empty-icon">🛒</div>
+        <h2>Your cart is empty</h2>
+        <p>Add dishes from the menu to start your order.</p>
+        <button type="button" class="primary-btn" [routerLink]="['/menu']">Browse Menu</button>
+      </section>
+    } @else {
+      <section class="cart-items">
+        @for (item of items; track item.id) {
+          <article class="cart-item">
+            <img [src]="item.image" [alt]="item.name" />
+            <div class="info">
+              <h3>{{ item.name }}</h3>
+              <p>₱{{ item.price }} each</p>
+              <div class="qty-row">
+                <button type="button" (click)="removeOne(item)">−</button>
+                <span>{{ item.quantity }}</span>
+                <button type="button" (click)="addOne(item)">+</button>
+              </div>
+            </div>
+            <button type="button" class="remove-btn" (click)="removeItem(item.id)">Remove</button>
+          </article>
+        }
+      </section>
+
+      <aside class="summary-box">
+        @if (orderPlaced) {
+          <div class="success-banner">{{ orderMessage }}</div>
+        }
+
+        @if (!orderPlaced && orderMessage) {
+          <div class="warning-banner">{{ orderMessage }}</div>
+        }
+
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <strong>₱{{ total }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>Service</span>
+          <strong>₱0</strong>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <strong>₱{{ total }}</strong>
+        </div>
+        <button type="button" class="primary-btn wide" (click)="placeOrder()">Place Order</button>
+      </aside>
+    }
+  </div>
+</ion-content>
